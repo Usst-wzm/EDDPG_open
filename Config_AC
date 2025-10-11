@@ -1,0 +1,29 @@
+# 环境参数配置
+CONFIG = {
+    "buffer_size": 10000,
+    "batch_size": 32,
+    "gamma": 0.99,
+    "tau": 0.005,  # 增加目标网络更新率
+    "ou_theta": 0.15,
+    "ou_sigma": 0.3,
+    "lr_actor": 1e-4,
+    "lr_critic": 1e-4,
+    "lr_alpha": 1e-4,  # SAC温度参数学习率
+    "num_episodes": 500,
+    "state_size": 30,
+    "action_size": 30,
+    "log_interval": 50,
+    # TD3特定参数
+    "exploration_noise": 0.5,  # 探索噪声
+    "target_noise": 0.3,  # 目标策略噪声
+    "noise_clip": 0.5,  # 噪声裁剪
+    "policy_freq": 2,  # 策略更新频率
+    # 资源监控相关
+    "monitor_resources": True,
+}
+
+# 全局变量
+num_devices = 10  # 设备数量
+num_tasks = 3  # 每个设备的任务数量
+total_task = num_tasks * num_devices
+time_step = 0  # 初始时间步
