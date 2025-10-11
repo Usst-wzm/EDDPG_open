@@ -1,0 +1,8 @@
+      bandwidth = 100 * 2 ** 20 / 8  # 100Mbps -> MB/s
+      edge_capacity = 10. * 10 ** 9  # 10 GHz
+      unit_energy_consumption = 1.42 * 10 ** -7  # 本地能量消耗因子
+      unit_time_consumption = 4.75 * 10 ** -7  # 本地时间消耗因子
+      local_data = data_size * (1 - offload_ratio) * 8 * 2 ** 20
+      a = 1.5 * 10 ** -7  # 云端额外能量消耗因子
+      APP = 1900.  # 一个常数，用于计算云端处理时间
+      edge_data = data_size * offload_ratio * 8 * 2 ** 20
