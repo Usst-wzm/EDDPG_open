@@ -1,8 +1,40 @@
-      bandwidth = 100 * 2 ** 20 / 8  # 100Mbps -> MB/s
-      edge_capacity = 10. * 10 ** 9  # 10 GHz
-      unit_energy_consumption = 1.42 * 10 ** -7  # 本地能量消耗因子
-      unit_time_consumption = 4.75 * 10 ** -7  # 本地时间消耗因子
-      local_data = data_size * (1 - offload_ratio) * 8 * 2 ** 20
-      a = 1.5 * 10 ** -7  # 云端额外能量消耗因子
-      APP = 1900.  # 一个常数，用于计算云端处理时间
-      edge_data = data_size * offload_ratio * 8 * 2 ** 20
+┌─────────────────────┬─────────────────┬─────────────┬──────────┬─────────────────────────────────────────────────┐
+│ Parameter Name      │ Symbol in Code  │ Value       │ Unit     │ Description                                     │
+├─────────────────────┼─────────────────┼─────────────┼──────────┼─────────────────────────────────────────────────┤
+│ Number of users     │ N               │ User defined│ -        │ Number of users in the system                   │
+│ Number of tasks     │ M               │ User defined│ -        │ Number of tasks per user                        │
+│ CPU cycles per bit  │ APP             │ 1900.0      │ cycles/bit│ CPU cycles required per bit to complete the task│
+│ CPU frequency       │ fc              │ 10×10⁹      │ Hz       │ User CPU frequency                              │
+│ Weight coefficient  │ p               │ 1           │ -        │ Weight factor for energy and delay             │
+│ Edge server energy  │ a               │ 1.5×10⁻⁷    │ J/bit    │ Energy coefficient for edge server processing   │
+│ Transmission energy │ et              │ 1.42×10⁻⁷   │ J/bit    │ Energy for receiving/transmitting unit data    │
+│ Local processing    │ El              │ 3.25×10⁻⁷   │ J/bit    │ Local energy for processing unit data          │
+│ Local processing    │ Tl              │ 4.75×10⁻⁷   │ s/bit    │ Local time for processing unit data            │
+│ Upload bandwidth    │ CUL             │ 100/8       │ Mbps     │ User upload bandwidth                          │
+│ Download bandwidth  │ CDL             │ 100/8       │ Mbps     │ User download bandwidth                        │
+└─────────────────────┴─────────────────┴─────────────┴──────────┴─────────────────────────────────────────────────┘
+
+┌─────────────────────┬─────────────┬─────────────────────────────────────────────────┐
+│ Parameter           │ Value       │ Description                                     │
+├─────────────────────┼─────────────┼─────────────────────────────────────────────────┤
+│ Data unit conversion│ 8×2²⁰       │ Convert MB to bits (1MB=8×1024×1024 bits)      │
+└─────────────────────┴─────────────┴─────────────────────────────────────────────────┘
+
+┌─────────────┬──────────┬─────────────────────────────────────────────────┐
+│ Name        │ Dimension│ Description                                     │
+├─────────────┼──────────┼─────────────────────────────────────────────────┤
+│ Datain      │ N×M      │ User task input data matrix                     │
+│ Dataout     │ N×M      │ User task output data matrix                    │
+│ X           │ N×M      │ Offloading decision matrix (0=local, 1=offload) │
+│ C           │ N×2      │ Bandwidth allocation matrix                     │
+└─────────────┴──────────┴─────────────────────────────────────────────────┘
+
+┌─────────────────────┬───────────────────────────┬─────────────────────────────────────────────────┐
+│ Metric              │ Formula                   │ Description                                     │
+├─────────────────────┼───────────────────────────┼─────────────────────────────────────────────────┤
+│ Local energy        │ El × data volume          │ Local energy consumption                        │
+│ Transmission energy │ et × data volume          │ Transmission energy consumption                │
+│ Edge server energy  │ a×data volume + et×data   │ Edge server energy consumption                 │
+│ Local delay         │ Tl × data volume          │ Local processing time delay                    │
+│ Edge server delay   │ APP×data volume / fc      │ Edge server processing delay                   │
+└─────────────────────┴───────────────────────────┴─────────────────────────────────────────────────┘
