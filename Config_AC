@@ -1,29 +1,64 @@
-# 环境参数配置
-CONFIG = {
-    "buffer_size": 10000,
-    "batch_size": 32,
-    "gamma": 0.99,
-    "tau": 0.005,  # 增加目标网络更新率
-    "ou_theta": 0.15,
-    "ou_sigma": 0.3,
-    "lr_actor": 1e-4,
-    "lr_critic": 1e-4,
-    "lr_alpha": 1e-4,  # SAC温度参数学习率
-    "num_episodes": 500,
-    "state_size": 30,
-    "action_size": 30,
-    "log_interval": 50,
-    # TD3特定参数
-    "exploration_noise": 0.5,  # 探索噪声
-    "target_noise": 0.3,  # 目标策略噪声
-    "noise_clip": 0.5,  # 噪声裁剪
-    "policy_freq": 2,  # 策略更新频率
-    # 资源监控相关
-    "monitor_resources": True,
-}
+┌─────────────────────┬─────────────┬─────────────────────────────────────────────────┐
+│ Parameter           │ Value       │ Description                                     │
+├─────────────────────┼─────────────┼─────────────────────────────────────────────────┤
+│ buffer_size         │ 10000       │ Experience replay buffer size                   │
+│ batch_size          │ 32          │ Training batch size                             │
+│ gamma               │ 0.99        │ Discount factor                                 │
+│ tau                 │ 0.005       │ Target network soft update coefficient          │
+│ ou_theta            │ 0.15        │ OU noise theta parameter                        │
+│ ou_sigma            │ 0.3         │ OU noise sigma parameter                        │
+│ lr_actor            │ 1e-4        │ Actor network learning rate                     │
+│ lr_critic           │ 1e-4        │ Critic network learning rate                    │
+│ lr_alpha            │ 1e-4        │ SAC temperature parameter learning rate         │
+│ num_episodes        │ 500         │ Number of training episodes                     │
+│ state_size          │ 30          │ State space dimension                           │
+│ action_size         │ 30          │ Action space dimension                          │
+│ log_interval        │ 50          │ Log recording interval                          │
+│ exploration_noise   │ 0.5         │ Exploration noise intensity                     │
+│ target_noise        │ 0.3         │ Target policy noise                             │
+│ noise_clip          │ 0.5         │ Noise clipping range                            │
+│ policy_freq         │ 2           │ Policy update frequency                         │
+│ monitor_resources   │ True        │ Whether to monitor resources                    │
+│ num_devices         │ 10          │ Number of devices                               │
+│ num_tasks           │ 3           │ Number of tasks per device                      │
+└─────────────────────┴─────────────┴─────────────────────────────────────────────────┘
 
-# 全局变量
-num_devices = 10  # 设备数量
-num_tasks = 3  # 每个设备的任务数量
-total_task = num_tasks * num_devices
-time_step = 0  # 初始时间步
+┌──────────────────────┬─────────────┬─────────────────────────────────────────────────┐
+│ Parameter            │ Value       │ Description                                     │
+├──────────────────────┼─────────────┼─────────────────────────────────────────────────┤
+│ num_heads            │ 4           │ Number of multi-head attention heads            │
+│ d_model              │ 128         │ Attention model dimension                       │
+│ alpha decay lambda   │ 0.01        │ Fusion weight decay coefficient                 │
+│ initial_alpha        │ 0.5         │ Initial fusion weight                           │
+│ reward_percentile    │ 75          │ High-quality experience percentile threshold    │
+│ time_decay_factor    │ 0.95        │ Time decay factor                               │
+│ min_buffer_size      │ 50          │ Minimum buffer size for attention               │
+│ attention_temp       │ 0.1         │ Attention temperature parameter                 │
+│ max_concentration    │ 0.5         │ Maximum concentration factor                    │
+└──────────────────────┴─────────────┴─────────────────────────────────────────────────┘
+
+
+
+┌──────────────────────┬─────────────┬─────────────────────────────────────────────────┐
+│ Parameter            │ Value       │ Description                                     │
+├──────────────────────┼─────────────┼─────────────────────────────────────────────────┤
+│ actor_hidden1        │ 256         │ Actor network first hidden layer size           │
+│ actor_hidden2        │ 128         │ Actor network second hidden layer size          │
+│ actor_hidden3        │ 128         │ Actor network second hidden layer size          │
+│ critic_hidden1       │ 256         │ Critic state encoder layer size                 │
+│ critic_hidden2       │ 128         │ Critic Q-network hidden layer size              │
+│ critic_hidden3       │ 128         │ Critic Q-network hidden layer size              │
+│ d_k                  │ 32          │ Dimension per attention head (128/4)            │
+│ dropout_rate         │ 0.1         │ Attention layer dropout rate                    │
+│ activation           │ ReLU        │ Hidden layer activation function                │
+│ output_activation    │ Tanh        │ Actor output activation function                │
+│ layer_norm           │ Enabled     │ Use layer normalization                         │
+│ learnable_temp       │ Enabled     │ Learnable temperature parameter                 │
+└──────────────────────┴─────────────┴─────────────────────────────────────────────────┘
+
+├──────────────────────┼──────────────────┼─────────────────────────────────────────────────┤
+│ MultiHeadAttention   │ W_q: Linear(30→128) │ 4-head attention, 32-dim per head            │
+│                      │ W_k: Linear(30→128) │ Learnable temperature parameter              │
+│                      │ W_v: Linear(30→128) │ Layer normalization + Dropout(0.1)           │
+│                      │ W_o: Linear(128→30) │                                              │
+└──────────────────────┴──────────────────┴─────────────────────────────────────────────────┘
