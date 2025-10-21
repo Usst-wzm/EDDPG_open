@@ -1,12 +1,12 @@
 # EDDPG_open
 
-This is a list of the hyperparameter from EDDPG.
+This is a list of the hyperparameters used in EDDPG.
 
 **Config_AC** is the Network parameters.
 
 **Config_Env** is the Experiment parameters.
 
-The experiment parameter is main derived from the following artcles:
+The experiment parameters are mainly derived from the following articles:
 
 1.**Antti P Miettinen and Jukka K Nurminen. Energy efficiency of mobileclients in cloud computing.
 In 2nd USENIX workshop on hot topics in cloud computing (HotCloud 10), 2010.**
