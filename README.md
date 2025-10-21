@@ -2,9 +2,9 @@
 
 This is a list of the hyperparameter from EDDPG.
 
-**Config_AC** is the Network parameter.
+**Config_AC** is the Network parameters.
 
-**Config_Env** is the experiment parameter.
+**Config_Env** is the Experiment parameters.
 
 The experiment parameter is main derived from the following artcles:
 
