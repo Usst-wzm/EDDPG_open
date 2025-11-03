@@ -7,8 +7,8 @@
 │ tau                 │ 0.005       │ Target network soft update coefficient          │
 │ ou_theta            │ 0.15        │ OU noise theta parameter                        │
 │ ou_sigma            │ 0.3         │ OU noise sigma parameter                        │
-│ lr_actor            │ 1e-4        │ Actor network learning rate                     │
-│ lr_critic           │ 1e-4        │ Critic network learning rate                    │
+│ lr_actor            │ 1e-2        │ Actor network learning rate                     │
+│ lr_critic           │ 1e-2        │ Critic network learning rate                    │
 │ lr_alpha            │ 1e-4        │ SAC temperature parameter learning rate         │
 │ num_episodes        │ 500         │ Number of training episodes                     │
 │ state_size          │ 30          │ State space dimension                           │
@@ -30,7 +30,7 @@
 │ d_model              │ 128         │ Attention model dimension                       │
 │ alpha decay lambda   │ 0.01        │ Fusion weight decay coefficient                 │
 │ initial_alpha        │ 0.5         │ Initial fusion weight                           │
-│ reward_percentile    │ 75          │ High-quality experience percentile threshold    │
+│ reward_percentile    │ 80          │ High-quality experience percentile threshold    │
 │ time_decay_factor    │ 0.95        │ Time decay factor                               │
 │ min_buffer_size      │ 50          │ Minimum buffer size for attention               │
 │ attention_temp       │ 0.1         │ Attention temperature parameter                 │
