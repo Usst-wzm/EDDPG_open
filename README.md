@@ -1,15 +1,38 @@
-# EDDPG_open
+# EDDPG Implementation
 
-This is a list of the hyperparameters used in EDDPG.
+This repository contains an implementation of EDDPG (Enhanced Deep Deterministic Policy Gradient) with the following configuration structure:
 
-**Config_AC** is the Network parameters.
+## 🛠 Configuration Files
 
-**Config_Env** is the Experiment parameters.
+### `Config_AC` - Network Parameters
+- Contains neural network architecture specifications
+- Defines actor-critic model configurations
+- Includes learning rates and optimization parameters
 
-The experiment parameters are mainly derived from the following articles:
+### `Config_Env` - Experiment Parameters
+- Environment-specific settings
+- Training and evaluation configurations
+- Resource allocation parameters
 
-1.**Antti P Miettinen and Jukka K Nurminen. Energy efficiency of mobileclients in cloud computing.
-In 2nd USENIX workshop on hot topics in cloud computing (HotCloud 10), 2010.**
+## 📚 Research Foundation
 
-2.**Meng-Hsi Chen, Ben Liang, and Min Dong. Joint offloading decision and resource allocation for multi-user multi-task mobile cloud.
-In 2016 IEEE International Conference on Communications (ICC), pages 1–6. IEEE, 2016.**
+The experiment parameters are based on established research in mobile cloud computing:
+
+### Key References:
+1. **Miettinen, A. P., & Nurminen, J. K.** (2010)  
+   *"Energy efficiency of mobile clients in cloud computing"*  
+   📄 2nd USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 10)
+
+2. **Chen, M.-H., Liang, B., & Dong, M.** (2016)  
+   *"Joint offloading decision and resource allocation for multi-user multi-task mobile cloud"*  
+   📄 IEEE International Conference on Communications (ICC)  
+   🔗 DOI: [10.1109/ICC.2016.7510695](https://doi.org/10.1109/ICC.2016.7510695)
+
+## 🚀 Quick Start
+
+```python
+# Example usage
+from eddpg import EDDPG
+from config import Config_AC, Config_Env
+
+agent = EDDPG(Config_AC, Config_Env)
