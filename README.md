@@ -14,9 +14,9 @@ This repository contains an implementation of EDDPG (Enhanced Deep Deterministic
 - Training and evaluation configurations
 - Resource allocation parameters
 
-## 📚 Research Foundation
+## 📚 Parameter Source
 
-The experiment parameters are based on established research in mobile cloud computing:
+The experiment parameters are based on established research in following Reference:
 
 ### Key References:
 1. **Miettinen, A. P., & Nurminen, J. K.** (2010)  
